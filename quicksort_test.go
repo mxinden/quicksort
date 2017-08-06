@@ -13,6 +13,7 @@ var quickSortTests = []struct {
 }{
 	{filePath: "./examples/1", expectedComparisons: 0},
 	{filePath: "./examples/12", expectedComparisons: 1},
+	{filePath: "./examples/21", expectedComparisons: 1},
 	{filePath: "./examples/empty", expectedComparisons: 0},
 }
 
@@ -22,19 +23,22 @@ func TestQuickSort(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		outputSlice, amountComparisons := quicksort(inputSlice, 0)
+
+		outputSlice := make([]int, len(inputSlice))
+		copy(outputSlice, inputSlice)
+
+		amountComparisons := quicksort(outputSlice)
 
 		sortedSlice := make([]int, len(inputSlice))
 		copy(sortedSlice, inputSlice)
 		sort.Ints(sortedSlice)
 
 		if !reflect.DeepEqual(outputSlice, sortedSlice) {
-			t.Fatal(fmt.Sprintf("output slice not sorted, expected %v, got %v", sortedSlice, outputSlice))
+			t.Fatal(fmt.Sprintf("%v: output slice not sorted, expected %v, got %v", test.filePath, sortedSlice, outputSlice))
 		}
 
 		if test.expectedComparisons != amountComparisons {
-			t.Fatal(fmt.Sprintf("amountComparisons does not equal expected comparisons, expected %v, got %v", test.expectedComparisons, amountComparisons))
+			t.Fatal(fmt.Sprintf("%v: amount comparisons does not equal expected comparisons, expected %v, got %v", test.filePath, test.expectedComparisons, amountComparisons))
 		}
-
 	}
 }
