@@ -11,10 +11,8 @@ var quickSortTests = []struct {
 	filePath            string
 	expectedComparisons int
 }{
-	{
-		filePath:            "./examples/1",
-		expectedComparisons: 0,
-	},
+	{filePath: "./examples/1", expectedComparisons: 0},
+	{filePath: "./examples/empty", expectedComparisons: 0},
 }
 
 func TestQuickSort(t *testing.T) {
