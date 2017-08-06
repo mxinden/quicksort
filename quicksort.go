@@ -18,15 +18,15 @@ func s(slice []int, start, end int) int {
 	for i := start + 1; i <= end; i = i + 1 {
 		if slice[i] < pivot {
 			swap(slice, i, small+1)
-			small = i
+			small = small + 1
 		}
 	}
 
-	a, b := 0, 0
-	a = s(slice, start+1, small)
-	b = s(slice, small+1, end)
-
 	swap(slice, start, small)
+
+	a, b := 0, 0
+	a = s(slice, start, small-1)
+	b = s(slice, small+1, end)
 
 	return a + b + (end - start)
 }
