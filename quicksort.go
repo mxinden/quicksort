@@ -40,14 +40,26 @@ func swap(slice []int, a, b int) {
 
 type preparePivot func(slice []int, start, end int)
 
-func firstElementPivot(slice []int, start, end int) {
-
-}
+func firstElementPivot(slice []int, start, end int) {}
 
 func finalElementPivot(slice []int, start, end int) {
 	swap(slice, start, end)
 }
 
 func medianPivot(slice []int, start, end int) {
+	if end-start < 2 {
+		return
+	}
 
+	middleIndex := start + (end-start)/2
+
+	first := slice[start]
+	middle := slice[middleIndex]
+	last := slice[end]
+
+	if (first < middle && middle < last) || (last < middle && middle < first) {
+		swap(slice, start, middleIndex)
+	} else if (first < last && last < middle) || (middle < last && last < first) {
+		swap(slice, start, end)
+	}
 }
