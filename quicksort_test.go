@@ -12,6 +12,7 @@ var quickSortTests = []struct {
 	expectedComparisons int
 }{
 	{filePath: "./examples/1", expectedComparisons: 0},
+	{filePath: "./examples/12", expectedComparisons: 1},
 	{filePath: "./examples/empty", expectedComparisons: 0},
 }
 
